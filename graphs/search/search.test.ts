@@ -12,7 +12,21 @@ describe("DFS", function () {
     const graph = new UGraphStr();
     const [a, b, c, d] = graph.addFromVals(["a", "b", "c", "d"]);
     graph.addEdges([[d, b], [b, a], [a, c], [c, d]]);
-    const rez = iDfs(a).join("-");
+    const rez = rDfs(a).join("-");
+    console.log(rez);
+    expect(["a-b-d-c", "a-c-d-b"]).toContain(rez);
+  });
+  it.each([
+    ["iDFS", iDfs],
+    ["rDFS", rDfs],
+  ])("DFS does a-b-d-c or a-c-d-b (%s)", function (name, fn) {
+    //    d -- b -- a -- c
+    //     \------------/
+    const graph = new UGraphStr();
+    const [a, b, c, d] = graph.addFromVals(["a", "b", "c", "d"]);
+    graph.addEdges([[d, b], [b, a], [a, c]]);
+    const rez = rDfs(a).join("-");
+    console.log(rez);
     expect(["a-b-d-c", "a-c-d-b"]).toContain(rez);
   });
 });

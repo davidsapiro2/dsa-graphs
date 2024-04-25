@@ -14,22 +14,26 @@ function rDfs(
         return result;
       }
 
-      if (visited.size === 0){
-        return result;
-      }
+      result.push(start.value);
 
-      result
-
-      for (let adj of node.adjacent){
-        if (!seen.includes(adj.value)){
-          toVisit.push(adj);
-          seen.push(adj.value);
+      for (let adj of start.adjacent){
+        if (!visited.has(adj)){
+          visited.add(adj);
+          rDfs(adj, result, visited);
         }
       }
 
-
-  return ["todo"];
+  return result;
 }
+
+/**
+ *
+ * stack: a
+ * result: [a, b, c, d]
+ * visited: [a, b, c, d]
+ *
+ */
+
 
 /** Return array of nodes, in DFS order (iterative version)  */
 
